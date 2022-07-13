@@ -23,16 +23,31 @@ namespace AExclamated
             return null;
         }
 
-        public override object VisitConstant(AExclamatedParser.ConstantContext context)
+        public override object? VisitConstant(AExclamatedParser.ConstantContext context)
         {
             if (context == null)
                 throw new Exception("Value Error");
 
+            // Console.WriteLine(context.BOOL().GetText());
 
-            if (context.INTEGER != null)
-                return int.Parse(context.INTEGER().GetText());
+            if (context.INTEGER() is { } i)
+                return int.Parse(i.GetText());
 
-            throw new Exception();
+            if (context.FLOAT() is { } f)
+                return float.Parse(f.GetText());
+
+            if (context.STRING() is { } s)
+                return s.GetText()[1..^1]; // I shamelessly stole this >:)
+
+            if (context.BOOL() is { } b) // This doesn't work for some odd reason
+               return b.GetText() == "TRUE";
+
+            if (context.NULL() is { })
+                return null;
+
+
+
+            throw new Exception("");
         }
     }
 }
