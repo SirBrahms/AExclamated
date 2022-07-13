@@ -7,7 +7,7 @@ namespace AExclamated
     {
         public static void Main(string[] Args)
         {
-            string FileName = @""; // Will be Args[0]
+            string FileName = @"Test.ae"; // Will be Args[0]
                
             string Contents = File.ReadAllText(FileName);
 
