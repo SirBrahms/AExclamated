@@ -49,5 +49,10 @@ namespace AExclamated
 
             throw new Exception("");
         }
+
+        public override object? VisitParenthesizedExpression(AExclamatedParser.ParenthesizedExpressionContext context)
+        {
+            return Visit(context.expression());
+        }
     }
 }
